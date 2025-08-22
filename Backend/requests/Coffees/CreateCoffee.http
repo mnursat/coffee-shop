@@ -1,0 +1,7 @@
+@host = http://localhost:5001
+POST {{host}}/coffees
+Content-Type: application/json
+
+{
+    
+}
