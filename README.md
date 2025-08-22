@@ -5,6 +5,14 @@
 ## Описание
 Coffee Shop — это приложение для продажи кофе, построенное на ASP.NET Core (Backend) и современном фронтенде Angular (Frontend).
 
+## Реализованный функционал
+- CRUD для кофе (создание, получение)
+- Типы кофе: Молотый, Растворимый, Дрип
+- Описание, цена, изображение для каждого кофе
+- Глобальная обработка ошибок через ProblemDetails
+- Автоматическое применение миграций при запуске приложения
+- Тестовые .http-запросы для проверки API (папка requests)
+
 ## Структура проекта
 ```
 CoffeeShop/
@@ -18,19 +26,29 @@ CoffeeShop/
 ## Быстрый старт
 
 ### Backend
-1. Перейдите в папку Backend:
-   ```powershell
-   cd Backend/src
-   ```
+1. Перейдите в папку Backend/src:
+  ```powershell
+  cd Backend/src
+  ```
 2. Запустите проект:
-   ```powershell
-   dotnet run
-   ```
-3. Откройте Swagger по адресу, указанному в launchSettings.json (обычно https://localhost:7018/swagger).
+  ```powershell
+  dotnet run
+  ```
+3. При запуске автоматически применяются все миграции к базе данных.
+4. Откройте httpClient по адресу, указанному в launchSettings.json.
 
-### Frontend
-Фронтенд реализован на Angular.
+### Backend через Docker
+1. Перейдите в папку Backend:
+  ```powershell
+  cd Backend
+  ```
+2. Соберите и запустите контейнеры:
+  ```powershell
+  docker compose up --build
+  ```
+3. API будет доступен по адресу http://localhost:5001
 
+### Frontend (Angular)
 1. Перейдите в папку Frontend:
   ```powershell
   cd Frontend

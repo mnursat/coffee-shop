@@ -10,6 +10,10 @@ services:
       - "5001:5001"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - Database__ConnectionStrings__DefaultConnection=Host=db;Port=5432;Username=postgres;Password=strong-password;Database=coffeeshop;
+    depends_on:
+      db:
+        condition: service_healthy
   db:
     container_name: coffee-shop-db
     image: postgres:latest
@@ -21,6 +25,11 @@ services:
       - POSTGRES_PASSWORD=strong-password
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d coffeeshop"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres_data:

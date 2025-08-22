@@ -1,6 +1,8 @@
 using CoffeeShop.Errors;
+using CoffeeShop.Persistence;
 
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.RequestPipeline;
 
@@ -30,6 +32,17 @@ public static class WebApplicationExtensions
                 _ => Results.Problem()
             };
         });
+
+        return app;
+    }
+
+    public static WebApplication ApplyMigrations(this WebApplication app)
+    {
+        using (var scope = app.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<CoffeeDbContext>();
+            db.Database.Migrate();
+        }
 
         return app;
     }

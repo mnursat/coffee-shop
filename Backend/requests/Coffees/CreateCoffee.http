@@ -1,7 +1,16 @@
+# @name create
 @host = http://localhost:5001
 POST {{host}}/coffees
 Content-Type: application/json
 
 {
-    
+    "Name": "Кофе растворимый Carte Noire Original, банка, 95 г",
+    "Description": "Carte Noire Original* обладает насыщенным вкусом с яркими цитрусовыми нотами и запоминающимся ароматом. Это воплощение французских традиций в удобном формате растворимого кофе.",
+    "Price": 4570,
+    "ImageUrl": "https://ir-3.ozone.ru/s3/multimedia-1-3/wc1000/7715728947.jpg",
+    "CoffeeType": 1
 }
+
+###
+
+GET {{create.response.headers.Location}}
