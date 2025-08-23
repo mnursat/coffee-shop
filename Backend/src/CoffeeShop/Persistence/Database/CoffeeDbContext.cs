@@ -11,4 +11,5 @@ public class CoffeeDbContext : DbContext
     }
 
     public DbSet<Coffee> Coffees { get; set; }
+    public DbSet<User> Users { get; set; }
 }
