@@ -11,6 +11,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - Database__ConnectionStrings__DefaultConnection=Host=db;Port=5432;Username=postgres;Password=strong-password;Database=coffeeshop;
+      - JwtOptions__SecretKey=Qw8vTz2pLk9sXy4rBv6nJc1eZt7uGh5m
+      - JwtOptions__ExpiresHours=24
     depends_on:
       db:
         condition: service_healthy

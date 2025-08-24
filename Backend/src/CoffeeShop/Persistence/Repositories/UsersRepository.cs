@@ -23,7 +23,9 @@ public class UsersRepository
 
     public async Task<User?> GetByEmailAsync(string email)
     {
-        return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+        return await _dbContext.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.Email == email);
     }
 
     public async Task<IEnumerable<User>> GetAllAsync()

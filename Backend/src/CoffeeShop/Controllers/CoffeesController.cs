@@ -2,6 +2,7 @@ using CoffeeShop.Domain;
 using CoffeeShop.Enums;
 using CoffeeShop.Services;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShop.Controllers;
@@ -17,7 +18,8 @@ public class CoffeesController : ControllerBase
         _coffeesService = coffeesService;
     }
 
-    [HttpPost]
+    [Authorize]
+    [HttpPost("create")]
     public async Task<IActionResult> Create(CreateCoffeeRequest request)
     {
         var coffee = request.ToDomain();
@@ -69,8 +71,6 @@ public class CoffeesController : ControllerBase
         string Name,
         string Description,
         decimal Price,
-        DateTime CreatedAt,
-        DateTime UpdatedAt,
         string ImageUrl,
         CoffeeType CoffeeType
     )
@@ -82,8 +82,6 @@ public class CoffeesController : ControllerBase
                 Name: coffee.Name,
                 Description: coffee.Description,
                 Price: coffee.Price,
-                CreatedAt: coffee.CreatedAt,
-                UpdatedAt: coffee.UpdatedAt,
                 ImageUrl: coffee.ImageUrl,
                 CoffeeType: coffee.CoffeeType
             );

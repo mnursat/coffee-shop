@@ -1,0 +1,3 @@
+@host = http://localhost:5001
+@id = 090657b2-6f63-4192-a91d-e30cd16bcc63
+GET {{host}}/coffees/{{id}}

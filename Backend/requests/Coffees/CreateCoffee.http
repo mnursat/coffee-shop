@@ -1,16 +1,13 @@
-# @name create
+# Create Coffee
 @host = http://localhost:5001
-POST {{host}}/coffees
+POST {{host}}/coffees/create
 Content-Type: application/json
+Cookie: tasty-cookies=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQ6IjoiZjI4MmMzM2YtYTk3Yi00YjdmLThkYzYtNDhiODhmY2ZiOGFkIiwiZXhwIjoxNzU2MTA2MDk4fQ.EZVSy60sh8nX2W6mn_0vNY6zzufRBECy2eQJ4RlKehI;
 
 {
-    "Name": "Кофе растворимый Carte Noire Original, банка, 95 г",
-    "Description": "Carte Noire Original* обладает насыщенным вкусом с яркими цитрусовыми нотами и запоминающимся ароматом. Это воплощение французских традиций в удобном формате растворимого кофе.",
-    "Price": 4570,
-    "ImageUrl": "https://ir-3.ozone.ru/s3/multimedia-1-3/wc1000/7715728947.jpg",
+    "Name": "Кофе растворимый Нескафе Голд, 500 г",
+    "Description": "Хранить при температуре не выше 25°С и относительной влажности воздуха не более 75%. В сухом, без посторонних запахов и хорошо проветриваемом месте.",
+    "Price": 8995,
+    "ImageUrl": "https://ir-3.ozone.ru/s3/multimedia-1-o/wc1000/7361855304.jpg",
     "CoffeeType": 1
 }
-
-###
-
-GET {{create.response.headers.Location}}

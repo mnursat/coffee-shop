@@ -5,13 +5,17 @@ using CoffeeShop.Persistence.Repositories;
 
 namespace CoffeeShop.Services;
 
-public class UserService
+public class UsersService
 {
     private readonly UsersRepository _usersRepository;
     private readonly PasswordHasher _passwordHasher;
     private readonly JwtProvider _jwtProvider;
 
-    public UserService(UsersRepository usersRepository, PasswordHasher passwordHasher, JwtProvider jwtProvider)
+    public UsersService(
+        UsersRepository usersRepository,
+        PasswordHasher passwordHasher,
+        JwtProvider jwtProvider
+    )
     {
         _usersRepository = usersRepository;
         _passwordHasher = passwordHasher;

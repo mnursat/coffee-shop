@@ -1,6 +1,7 @@
 using CoffeeShop.Errors;
 using CoffeeShop.Persistence;
 
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,6 +44,18 @@ public static class WebApplicationExtensions
             var db = scope.ServiceProvider.GetRequiredService<CoffeeDbContext>();
             db.Database.Migrate();
         }
+
+        return app;
+    }
+
+    public static WebApplication SetCookiePolicy(this WebApplication app)
+    {
+        app.UseCookiePolicy(new CookiePolicyOptions
+        {
+            MinimumSameSitePolicy = SameSiteMode.Strict,
+            HttpOnly = HttpOnlyPolicy.Always,
+            Secure = CookieSecurePolicy.Always
+        });
 
         return app;
     }
