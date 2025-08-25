@@ -1,5 +1,6 @@
 using System.Text;
 
+using CoffeeShop.Domain.Enum;
 using CoffeeShop.Infrastructure;
 using CoffeeShop.Persistence;
 using CoffeeShop.Persistence.Repositories;
@@ -90,19 +91,19 @@ public static class ServiceCollectionExtensions
                     IssuerSigningKey =
                         new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtOptions:SecretKey"]))
                 };
-
-                options.Events = new JwtBearerEvents
-                {
-                    OnMessageReceived = context =>
-                    {
-                        context.Token = context.Request.Cookies["tasty-cookies"];
-
-                        return Task.CompletedTask;
-                    }
-                };
             });
 
-        services.AddAuthorization();
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("RequireUser", policy =>
+                policy.RequireRole(nameof(Roles.User), nameof(Roles.Admin), nameof(Roles.SuperAdmin)));
+
+            options.AddPolicy("RequireAdmin", policy =>
+                policy.RequireRole(nameof(Roles.Admin), nameof(Roles.SuperAdmin)));
+
+            options.AddPolicy("RequireSuperAdmin", policy =>
+                policy.RequireRole(nameof(Roles.SuperAdmin)));
+        });
 
         return services;
     }

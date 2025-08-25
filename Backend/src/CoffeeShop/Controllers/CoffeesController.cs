@@ -1,5 +1,6 @@
 using CoffeeShop.Domain;
 using CoffeeShop.Enums;
+using CoffeeShop.Infrastructure;
 using CoffeeShop.Services;
 
 using Microsoft.AspNetCore.Authorization;
@@ -18,7 +19,7 @@ public class CoffeesController : ControllerBase
         _coffeesService = coffeesService;
     }
 
-    [Authorize]
+    [Authorize(Policy = AuthorizationPolicies.RequireAdmin)]
     [HttpPost("create")]
     public async Task<IActionResult> Create(CreateCoffeeRequest request)
     {

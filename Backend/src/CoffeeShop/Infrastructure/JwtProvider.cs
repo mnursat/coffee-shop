@@ -20,7 +20,17 @@ public class JwtProvider
 
     public string GenerateToken(User user)
     {
-        Claim[] claims = [new("userId:", user.Id.ToString())];
+        var claims = new List<Claim>
+        {
+            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new(ClaimTypes.Name, user.Username),
+            new(ClaimTypes.Email, user.Email)
+        };
+
+        foreach (var role in user.Roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
+        }
 
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Value.SecretKey)),
@@ -30,10 +40,9 @@ public class JwtProvider
             claims: claims,
             signingCredentials: signingCredentials,
             expires: DateTime.UtcNow.AddHours(_options.Value.ExpiresHours)
-            );
+        );
 
         var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
-
         return tokenValue;
     }
 }

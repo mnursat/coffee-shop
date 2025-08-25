@@ -1,4 +1,5 @@
 using CoffeeShop.Domain;
+using CoffeeShop.Domain.Enum;
 using CoffeeShop.Errors;
 using CoffeeShop.Infrastructure;
 using CoffeeShop.Persistence.Repositories;
@@ -31,7 +32,8 @@ public class UsersService
         }
 
         var passwordHash = _passwordHasher.Generate(password);
-        var user = User.Create(Guid.NewGuid(), username, email, passwordHash);
+        var user = User.Create(Guid.NewGuid(), username, email, passwordHash,
+            [Roles.User]);
 
         await _usersRepository.AddAsync(user);
     }
@@ -47,6 +49,29 @@ public class UsersService
 
         var token = _jwtProvider.GenerateToken(user);
         return token;
+    }
+
+    public async Task EditAsync(Guid userId, string username, string email)
+    {
+        var user = await _usersRepository.GetByIdAsync(userId);
+        if (user == null)
+        {
+            throw new NotFoundException("User not found.");
+        }
+
+        var updatedUser = User.Create(user.Id, username, email, user.PasswordHash, user.Roles);
+        await _usersRepository.UpdateAsync(updatedUser);
+    }
+
+    public async Task DeleteAsync(Guid userId)
+    {
+        var user = await _usersRepository.GetByIdAsync(userId);
+        if (user == null)
+        {
+            throw new NotFoundException("User not found.");
+        }
+
+        await _usersRepository.DeleteAsync(user);
     }
 
 }

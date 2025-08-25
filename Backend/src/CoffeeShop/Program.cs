@@ -23,5 +23,7 @@ var app = builder.Build();
     app.UseAuthentication();
     app.UseAuthorization();
     app.MapGet("/health", () => "It works!");
+
     app.Run();
 }
+
