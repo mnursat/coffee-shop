@@ -1,3 +1,4 @@
+using CoffeeShop.Contracts.Jwt;
 using CoffeeShop.Domain;
 using CoffeeShop.Domain.Enum;
 using CoffeeShop.Errors;
@@ -5,7 +6,6 @@ using CoffeeShop.Infrastructure;
 using CoffeeShop.Persistence.Repositories;
 
 namespace CoffeeShop.Services;
-
 public class UsersService
 {
     private readonly UsersRepository _usersRepository;
@@ -38,17 +38,34 @@ public class UsersService
         await _usersRepository.AddAsync(user);
     }
 
-    public async Task<string> AuthenticateAsync(string email, string password)
+    public async Task<TokenResponseDto?> AuthenticateAsync(string email, string password)
     {
         var user = await _usersRepository.GetByEmailAsync(email);
-        
+
         if (user == null || !_passwordHasher.Verify(password, user.PasswordHash))
         {
             throw new UnauthorizedAccessException("Invalid email or password.");
         }
 
-        var token = _jwtProvider.GenerateToken(user);
-        return token;
+        return await CreateTokenResponseAsync(user);
+    }
+
+    private async Task<TokenResponseDto> CreateTokenResponseAsync(User? user)
+    {
+        var accessToken = _jwtProvider.GenerateToken(user);
+        var refreshToken = await _jwtProvider.GenerateAndStoreRefreshTokenAsync(user);
+        return new TokenResponseDto(accessToken, refreshToken);
+    }
+
+    public async Task<TokenResponseDto?> RefreshTokenAsync(RefreshTokenRequestDto request)
+    {
+        var user = await _jwtProvider.ValidateRefreshTokenAsync(request.UserId, request.RefreshToken);
+        if (user is null)
+        {
+            throw new UnauthorizedAccessException("Invalid refresh token.");
+        }
+
+        return await CreateTokenResponseAsync(user);
     }
 
     public async Task EditAsync(Guid userId, string username, string email)
@@ -74,4 +91,14 @@ public class UsersService
         await _usersRepository.DeleteAsync(user);
     }
 
+    public async Task LogoutAsync(Guid userId)
+    {
+        var user = await _usersRepository.GetByIdAsync(userId);
+        if (user != null)
+        {
+            user.RefreshToken = null;
+            user.RefreshTokenExpiryTime = DateTime.MinValue;
+            await _usersRepository.UpdateAsync(user);
+        }
+    }
 }

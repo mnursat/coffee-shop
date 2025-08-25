@@ -9,6 +9,8 @@ public class User
     public string Email { get; init; }
     public string PasswordHash { get; init; }
     public IEnumerable<Roles> Roles { get; init; }
+    public string? RefreshToken { get; set; }
+    public DateTime? RefreshTokenExpiryTime { get; set; }
 
     private User(Guid id, string username, string email, string passwordHash, IEnumerable<Roles> roles)
     {

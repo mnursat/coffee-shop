@@ -24,14 +24,12 @@ public class UsersRepository
     public async Task<User?> GetByIdAsync(Guid userId)
     {
         return await _dbContext.Users
-            .AsNoTracking()
             .FirstOrDefaultAsync(u => u.Id == userId);
     }
 
     public async Task<User?> GetByEmailAsync(string email)
     {
         return await _dbContext.Users
-            .AsNoTracking()
             .FirstOrDefaultAsync(u => u.Email == email);
     }
 
@@ -50,6 +48,11 @@ public class UsersRepository
     public async Task DeleteAsync(User user)
     {
         _dbContext.Users.Remove(user);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task SaveChangesAsync()
+    {
         await _dbContext.SaveChangesAsync();
     }
 }

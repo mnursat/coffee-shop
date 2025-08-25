@@ -38,7 +38,7 @@ public static class ServiceCollectionExtensions
     )
     {
         services.AddSingleton<PasswordHasher>();
-        services.AddSingleton<JwtProvider>();
+        services.AddScoped<JwtProvider>();
 
         return services;
     }

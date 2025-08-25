@@ -1,15 +1,6 @@
-# Create Coffee
-@host = http://localhost:5001
+@host=http://localhost:5001
 @token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjBiZmEzNDYxLWZhMjItNGQzMy1iZjEyLTU2ZjlkMjBlNGUzMSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ0ZXN0dXNlcjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0ZXN0dXNlcjFAZXhhbXBsZS5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzU2MjA0ODg0fQ.BAL9sHe7_tDwtmo_of7yHxwpe-c5azJiqahEAmNnZiQ
 
-POST {{host}}/coffees/create
-Authorization: Bearer {{token}}
+POST {{host}}/users/logout
 Content-Type: application/json
-
-{
-    "Name": "Тест кофе",
-    "Description": "Хранить при температуре не выше 25°С и относительной влажности воздуха не более 75%. В сухом, без посторонних запахов и хорошо проветриваемом месте.",
-    "Price": 9856,
-    "ImageUrl": "https://ir-3.ozone.ru/s3/multimedia-2-o/wc1000/7361855304.jpg",
-    "CoffeeType": 2
-}
+Authorization: Bearer {{token}}

@@ -1,3 +1,4 @@
+using CoffeeShop.Contracts.Jwt;
 using CoffeeShop.Domain.Enum;
 using CoffeeShop.Infrastructure;
 using CoffeeShop.Services;
@@ -26,17 +27,42 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> LoginAsync(AuthenticateUserRequest request)
+    public async Task<ActionResult<TokenResponseDto>> LoginAsync(AuthenticateUserRequest request)
     {
-        var token = await _usersService.AuthenticateAsync(request.Email, request.Password);
+        var result = await _usersService.AuthenticateAsync(request.Email, request.Password);
 
-        return Ok(new { Token = token });
+        if (result is null)
+        {
+            return BadRequest("Invalid email or password.");
+        }
+
+        return Ok(result);
+    }
+
+    [Authorize(Policy = AuthorizationPolicies.RequireUser)]
+    [HttpPost("refresh-token")]
+    public async Task<ActionResult<TokenResponseDto>> RefreshTokenAsync(RefreshTokenRequestDto request)
+    {
+        var result = await _usersService.RefreshTokenAsync(request);
+
+        if (result is null)
+        {
+            return Unauthorized("Invalid refresh token.");
+        }
+
+        return Ok(result);
     }
 
     [Authorize(Policy = AuthorizationPolicies.RequireUser)]
     [HttpPost("logout")]
     public async Task<IActionResult> LogoutAsync()
     {
+        var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+        if (userIdClaim is null || !Guid.TryParse(userIdClaim.Value, out var userId))
+        {
+            return Unauthorized();
+        }
+        await _usersService.LogoutAsync(userId);
         return NoContent();
     }
 

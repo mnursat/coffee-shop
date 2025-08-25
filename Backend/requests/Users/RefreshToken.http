@@ -1,0 +1,9 @@
+@host=http://localhost:5001
+
+POST {{host}}/users/refresh-token
+Content-Type: application/json
+
+{
+    "userId": "d37ef11c-f818-43ba-8a72-0e80002ccdd1",
+    "refreshToken": "dZIi34/L0D00NJwigoYaODkUgjidV4ynFsReFQWrn2w="
+}
