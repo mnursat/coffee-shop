@@ -1,5 +1,4 @@
 using CoffeeShop.Contracts.Jwt;
-using CoffeeShop.Domain.Enum;
 using CoffeeShop.Infrastructure;
 using CoffeeShop.Services;
 

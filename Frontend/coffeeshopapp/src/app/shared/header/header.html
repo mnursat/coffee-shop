@@ -1,0 +1,48 @@
+<header>
+  <div class="flex justify-between items-center px-4 py-4 md:px-12 md:py-8">
+    <div class="flex self-baseline">
+      <a routerLink="/home" class="flex font-bold text-3xl italic"> Coffee Shop </a>
+    </div>
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex justify-center gap-4">
+      <a routerLink="/home" routerLinkActive="active" class="rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5">Главная</a>
+      <a routerLink="/coffees" routerLinkActive="active" class="rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5">Кофе</a>
+      <a routerLink="/about" routerLinkActive="active" class="rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5">О нас</a>
+    </nav>
+    <div class="hidden md:flex">
+      <a href="#" class="-mx-3 flex items-center gap-1 rounded-lg px-3 py-2.5 text-base/7 font-semibold text-white hover:bg-white/5">
+        <span>Войти</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+        </svg>
+      </a>
+    </div>
+    <!-- Hamburger for mobile -->
+    <div class="md:hidden flex items-center">
+      <button (click)="openMenu()" class="text-white focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  @if (isMenuOpen()) {
+    <div class="fixed inset-0 z-50">
+      <!-- Backdrop -->
+      <div class="absolute inset-0 bg-black/40" (click)="closeMenu()"></div>
+      <!-- Menu -->
+      <nav class="absolute top-0 right-0 w-64 bg-gray-900 rounded-xl shadow-lg flex flex-col items-center gap-6 py-8 px-4 text-xl text-white">
+        <a routerLink="/home" routerLinkActive="active" class="rounded-lg px-6 py-2 font-semibold hover:bg-white/10">Главная</a>
+        <a routerLink="/coffees" routerLinkActive="active" class="rounded-lg px-6 py-2 font-semibold hover:bg-white/10">Кофе</a>
+        <a routerLink="/about" routerLinkActive="active" class="rounded-lg px-6 py-2 font-semibold hover:bg-white/10">О нас</a>
+        <a href="#" class="flex items-center gap-2 rounded-lg px-6 py-2 font-semibold hover:bg-white/10">
+          <span>Войти</span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+        <button (click)="closeMenu()" class="mt-4 text-white text-base">Закрыть</button>
+      </nav>
+    </div>
+  }
+</header>
