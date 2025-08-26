@@ -1,6 +1,5 @@
 using CoffeeShop.Domain;
 using CoffeeShop.Errors;
-using CoffeeShop.Persistence;
 using CoffeeShop.Persistence.Repositories;
 
 namespace CoffeeShop.Services;
@@ -27,5 +26,10 @@ public class CoffeesService
         }
 
         return await _coffeesRepository.GetByIdAsync(coffeeId);
+    }
+
+    public async Task<IEnumerable<Coffee>> GetAllAsync()
+    {
+        return await _coffeesRepository.GetAllAsync();
     }
 }

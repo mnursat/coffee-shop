@@ -44,6 +44,14 @@ public class CoffeesController : ControllerBase
         : Ok(CoffeeResponse.FromDomain(coffee));
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var coffees = await _coffeesService.GetAllAsync();
+
+        return Ok(coffees.Select(CoffeeResponse.FromDomain));
+    }
+
     public record CreateCoffeeRequest(
         string Name,
         string Description,

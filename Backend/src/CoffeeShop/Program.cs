@@ -4,6 +4,7 @@ using CoffeeShop.RequestPipeline;
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services
+        .AddCorsPolicy()
         .AddServices()
         .AddInfrastructure()
         .AddConfigurationOptions(builder.Configuration)
@@ -16,6 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 {
+    app.UseCors();
     app.ApplyMigrations();
     app.UseGlobalErrorHandling();
     app.MapControllers();

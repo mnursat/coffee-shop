@@ -26,7 +26,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<TokenResponseDto>> LoginAsync(AuthenticateUserRequest request)
+    public async Task<IActionResult> LoginAsync(AuthenticateUserRequest request)
     {
         var result = await _usersService.AuthenticateAsync(request.Email, request.Password);
 
@@ -35,7 +35,25 @@ public class UsersController : ControllerBase
             return BadRequest("Invalid email or password.");
         }
 
-        return Ok(result);
+        // Устанавливаем JWT как httpOnly cookie
+        Response.Cookies.Append("jwt", result.AccessToken, new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = false, // Только для HTTPS
+            SameSite = SameSiteMode.Strict,
+            Expires = DateTimeOffset.UtcNow.AddHours(2)
+        });
+
+        // Можно вернуть только статус успеха, не возвращая сам токен
+        return Ok(new { message = "Login successful" });
+    }
+
+    [Authorize(Policy = AuthorizationPolicies.RequireUser)]
+    [HttpGet("check-auth")]
+    public IActionResult CheckAuth()
+    {
+        // Если пользователь авторизован, просто возвращаем 200 OK
+        return Ok(new { authenticated = true });
     }
 
     [Authorize(Policy = AuthorizationPolicies.RequireUser)]
@@ -61,7 +79,19 @@ public class UsersController : ControllerBase
         {
             return Unauthorized();
         }
+
         await _usersService.LogoutAsync(userId);
+
+        // Явно удаляем JWT куку
+        Response.Cookies.Append("jwt", "", new CookieOptions
+        {
+            Path = "/",
+            HttpOnly = true,
+            Secure = false,
+            SameSite = SameSiteMode.Strict,
+            Expires = DateTimeOffset.UtcNow.AddDays(-1)
+        });
+
         return NoContent();
     }
 
@@ -87,10 +117,11 @@ public class UsersController : ControllerBase
         string Password);
 
     public record AuthenticateUserRequest(string Email, string Password);
+
     public record EditUserRequest
     {
         public Guid UserId { get; init; }
-        public string Username { get; init; }
-        public string Email { get; init; }
+        public required string Username { get; init; }
+        public required string Email { get; init; }
     }
 }

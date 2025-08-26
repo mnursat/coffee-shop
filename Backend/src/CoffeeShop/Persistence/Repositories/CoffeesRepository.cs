@@ -24,6 +24,11 @@ public class CoffeesRepository
         return await _dbContext.Coffees.FindAsync(coffeeId);
     }
 
+    public async Task<IEnumerable<Coffee>> GetAllAsync()
+    {
+        return await _dbContext.Coffees.ToListAsync();
+    }
+
     public async Task<bool> ExistsAsync(Guid coffeeId)
     {
         return await _dbContext.Coffees.AnyAsync(c => c.Id == coffeeId);
