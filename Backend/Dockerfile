@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS Build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS Build
 
 WORKDIR /src
 
@@ -17,7 +17,7 @@ FROM build AS publish
 RUN dotnet publish "CoffeeShop.csproj" -c Release -o /app/publish
 
 # Stage 3: Run
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:9.0
 ENV ASPNETCORE_HTTP_PORTS=5001
 EXPOSE 5001
 WORKDIR /app

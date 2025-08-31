@@ -1,9 +1,12 @@
 using CoffeeShop.DependencyInjection;
 using CoffeeShop.RequestPipeline;
 
+using Scalar.AspNetCore;
+
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services
+        .AddOpenApi()
         .AddCorsPolicy()
         .AddServices()
         .AddInfrastructure()
@@ -17,6 +20,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 {
+    if (app.Environment.IsDevelopment())
+    {
+        app.MapScalarApiReference();
+        app.MapOpenApi();
+    }
+
     app.UseCors();
     app.ApplyMigrations();
     app.UseGlobalErrorHandling();
@@ -24,7 +33,6 @@ var app = builder.Build();
     app.SetCookiePolicy();
     app.UseAuthentication();
     app.UseAuthorization();
-    app.MapGet("/health", () => "It works!");
 
     app.Run();
 }
