@@ -1,0 +1,180 @@
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Italic'), local('Roboto-Italic'),
+  url('/assets/fonts/Roboto-Italic.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-Italic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'),
+  url('/assets/fonts/Roboto-BoldItalic.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto ExtraBold Italic'), local('Roboto-ExtraBoldItalic'),
+  url('/assets/fonts/Roboto-ExtraBoldItalic.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-ExtraBoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Black'), local('Roboto-Black'),
+  url('/assets/fonts/Roboto-Black.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto ExtraBold'), local('Roboto-ExtraBold'),
+  url('/assets/fonts/Roboto-ExtraBold.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-ExtraBold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Black Italic'), local('Roboto-BlackItalic'),
+  url('/assets/fonts/Roboto-BlackItalic.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-BlackItalic.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto ExtraLight Italic'), local('Roboto-ExtraLightItalic'),
+  url('/assets/fonts/Roboto-ExtraLightItalic.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-ExtraLightItalic.woff') format('woff');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto ExtraLight'), local('Roboto-ExtraLight'),
+  url('/assets/fonts/Roboto-ExtraLight.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-ExtraLight.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Bold'), local('Roboto-Bold'),
+  url('/assets/fonts/Roboto-Bold.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Medium'), local('Roboto-Medium'),
+  url('/assets/fonts/Roboto-Medium.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Thin'), local('Roboto-Thin'),
+  url('/assets/fonts/Roboto-Thin.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto SemiBold Italic'), local('Roboto-SemiBoldItalic'),
+  url('/assets/fonts/Roboto-SemiBoldItalic.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-SemiBoldItalic.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Regular'), local('Roboto-Regular'),
+  url('/assets/fonts/Roboto-Regular.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Light'), local('Roboto-Light'),
+  url('/assets/fonts/Roboto-Light.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Light Italic'), local('Roboto-LightItalic'),
+  url('/assets/fonts/Roboto-LightItalic.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Medium Italic'), local('Roboto-MediumItalic'),
+  url('/assets/fonts/Roboto-MediumItalic.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto SemiBold'), local('Roboto-SemiBold'),
+  url('/assets/fonts/Roboto-SemiBold.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Thin Italic'), local('Roboto-ThinItalic'),
+  url('/assets/fonts/Roboto-ThinItalic.woff2') format('woff2'),
+  url('/assets/fonts/Roboto-ThinItalic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
