@@ -1,1 +1,18 @@
-<p>header works!</p>
+<header>
+  <div class="header-container">
+    <img src="/assets/images/icon.png" alt="icon" class="header-container__icon" />
+    <nav class="header-container__nav">
+      <ul>
+        <li><a [routerLink]="['home']">Главная</a></li>
+        <li><a [routerLink]="['coffee']">Кофе</a></li>
+        <li><a [routerLink]="['about']">О нас</a></li>
+      </ul>
+    </nav>
+    <div>
+      <a [routerLink]="['login']">
+        Войти
+      </a>
+    </div>
+  </div>
+</header>
+

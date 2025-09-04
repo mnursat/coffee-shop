@@ -1,7 +1,19 @@
+@use "reset";
 @use "fonts";
-@use "tailwindcss";
+
+:root {
+  --color-primary: #1a1616;      // Тёмный эспрессо
+  --color-secondary: #6F4E37;    // Кофейный коричневый
+  --color-accent: #C0A98E;       // Светлый латте
+  --color-background: #1A1209;   // Очень тёмный фон
+  --color-text: #F5F3EE;         // Светлый текст
+}
 
 body {
   height: 100dvh;
   font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  padding: 24px 48px;
+  background: var(--color-primary);
+  color: var(--color-text);
 }
